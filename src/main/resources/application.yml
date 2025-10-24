@@ -3,7 +3,6 @@ spring:
     name: product-web-api
   datasource:
     url: jdbc:postgresql://dpg-d3tfifbe5dus738tnekg-a.oregon-postgres.render.com:5432/dbsu6_c8rw
-   
     username: thongly
     password: iPye1zmW92Pc7Aik5lP9A8D2l97P24l9
     driver-class-name: org.postgresql.Driver
