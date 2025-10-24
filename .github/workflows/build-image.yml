@@ -1,0 +1,29 @@
+name: Build & Push Docker Image (Jib)
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write  # needed for GHCR
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build and push image with Jib
+        run: ./gradlew jib -Djib.to.image=ghcr.io/thongly-4u/product-web-api:latest -Djib.to.auth.username=${{ github.actor }} -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
